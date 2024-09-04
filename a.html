@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Автоматическая анимация прокрутки</title>
+    <style>
+        body {
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        #starter-image {
+            width: 200px;
+            cursor: pointer;
+            position: relative;
+            transition: opacity 0.5s ease;
+        }
+
+        
+
+        @keyframes scroll {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0; /* Скрыть изображение */
+            }
+            100% {
+                opacity: 1; /* Показать новое изображение */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <img id="starter-image" src="wow1.png" alt="Стартовая картинка">
+
+    <script>
+        const starterImage = document.getElementById('starter-image');
+        const images = [
+            'wow1.png',
+            'wow2.png',
+            'wow3.png',
+            'wow4.png',
+            'wow5.png',
+            'wow6.png',
+            'wow7.png',
+            'wow8.png',
+            'wow9.png',
+            'wow10.png',
+            'wow11.png',
+            'wow12.png',
+            'wow13.png'
+        ];
+
+        let currentIndex = 0; // Индекс текущего изображения
+
+        function changeImage() {
+            // Устанавливаем текущее изображение
+            starterImage.src = images[currentIndex];
+
+            // Запустить анимацию прокрутки
+            starterImage.classList.add('scroll');
+
+            // Подождать, пока анимация завершится, затем повысить индекс
+            setTimeout(function() {
+                starterImage.classList.remove('scroll'); // Убрать класс анимации
+            }, 500); // Время анимации
+
+            // Увеличиваем индекс
+            currentIndex++;
+
+            // Если индекс превышает длину массива, сбрасываем его
+            if (currentIndex >= images.length) {
+                currentIndex = 0;
+            }
+        }
+
+        // Изменение изображения каждые 3 секунды
+        setInterval(changeImage, 90);
+    </script>
+
+</body>
+</html>
